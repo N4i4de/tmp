@@ -1,0 +1,90 @@
+package Proxibanque.Service;
+
+import java.util.List;
+
+
+import Proxibanque.model.CarteBanquaire;
+import Proxibanque.model.Client;
+import Proxibanque.model.Compte;
+import Proxibanque.model.CompteCourant;
+import Proxibanque.model.CompteEpargne;
+
+/**
+ * Interface Service Gestion. 
+ * Permets de réaliser toutes les problématiques de gestions de comptes et des clients (création, modifications etc.).
+ * ces méthodes sont utilisés par le conseillé via le lanceur.
+ * @author Sandrine
+ * @version 0.1
+ *
+ */
+public interface ServiceGestion {
+	//Outils métiers du service gestion
+	/**
+	 * sauvegarde le client.
+	 * @param c
+	 * Instance Client à créer et à sauvegarder
+	 */
+	public void creerClient(Client c);
+	/**
+	 * cette méthode appelle l'interface DAO
+	 * @param id : identifiant du client
+	 * @param cmodif : client avec les modifications
+	 */
+	public void modifierClient(Integer id,Client cmodif);
+	/**
+	 * afficher les info du client
+	 * @param id
+	 * identifiant du client dont on veut afficher les informatiions
+	 */
+	public void lireInfoClient(Integer id);
+	/**
+	 * Attribue un compte épargne à un client
+	 * @param id 
+	 * identifiant du client
+	 * @param c
+	 * compte épargne à attribuer au client avec l'identifiant id.
+	 */
+	public void ajouterCompteEpargne(Integer id,CompteEpargne c);
+	/**
+	 * attribue un compte courant à un client
+	 * @param id
+	 * identifiant du client
+	 * @param c
+	 * compte courant attribuer au client avec l'identifiant id.
+	 */
+	public void ajouterCompteCourant(Integer id,CompteCourant c);
+	/**
+	 * supprime les comptes d'un client
+	 * @param id
+	 * identifiant du client dont on veut supprimer les comptes
+	 */
+	public void supprimerComptes(Integer id);
+	/**
+	 * lecture des comptes d'un client
+	 * @param id
+	 * identifiant du client dont on veut supprimer les comptes
+	 */
+	public void lireComptes(Integer id);
+	/**
+	 * ajout d'une carte
+	 * @param id
+	 * identifiant du client qui recevra la carte
+	 * @param carte
+	 * carte à attribuer au client id
+	 */
+	public void ajouterCarte(Integer id, CarteBanquaire carte);
+	/**
+	 * suppression d'une carte
+	 * @param id
+	 * identifiant du client dont on va supprimer la carte
+	 */
+	public void supprimerCarte(Integer id);
+	public void lireCarte(Integer id);
+	public void supprimerClient(Integer id);
+	
+	//outils de developpement
+	public  Client retournClient(Integer id);
+	public List<Client> retournListeClient();
+	
+
+}

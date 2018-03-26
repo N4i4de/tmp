@@ -1,0 +1,6 @@
+package Proxibanque.Service;
+
+public interface ServiceSI {
+	SimulationCredit(Client client);
+
+}

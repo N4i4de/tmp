@@ -1,0 +1,9 @@
+package Proxibanque.model;
+
+public class CarteBanquaire {
+	private Client client;
+	private String type
+	
+	
+
+}

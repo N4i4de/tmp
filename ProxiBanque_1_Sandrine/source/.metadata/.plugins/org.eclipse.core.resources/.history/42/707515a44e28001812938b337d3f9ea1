@@ -1,0 +1,33 @@
+package Proxibanque.persistance;
+
+import java.util.List;
+
+import Proxibanque.model.Client;
+
+public class MemDAOClient implements DaoClient {
+
+	@Override
+	public void save(Client c) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public Client getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Client> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

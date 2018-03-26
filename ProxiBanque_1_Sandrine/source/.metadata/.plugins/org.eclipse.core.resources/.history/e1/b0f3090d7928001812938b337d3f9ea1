@@ -1,0 +1,51 @@
+package Proxibanque.persistance;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
+import Proxibanque.model.Client;
+
+public class MemDAOClient implements DaoClient {
+	
+	public static final HashMap<Integer, Client> DBClient = new HashMap<>();
+
+	public void save(Client c) {
+		// TODO Sauvegarder le client dans la Hasmap
+		Integer i = DBClient.size();
+		//test sur le dernier id pour gerer les suppressions
+			DBClient.put(i+((int)Math.random()*10),c);
+	}
+
+	@Override
+	public Client getById(Integer id) {
+		// TODO Auto-generated method stub
+		return DBClient.get(id);
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		DBClient.remove(id);
+
+	}
+
+	@Override
+	public List<Client> getAll() {
+		// TODO Auto-generated method stub
+		Collection<Client> c = DBClient.values();
+		ArrayList<Client> liste = new ArrayList<Client>(c);
+		return  liste;
+	}
+
+	@Override
+	public void modifyClient(Integer id, Client cmodif) {
+		// TODO Auto-generated method stub
+		DBClient.remove(id);
+		DBClient.put(id, cmodif)
+		
+	}
+
+
+}

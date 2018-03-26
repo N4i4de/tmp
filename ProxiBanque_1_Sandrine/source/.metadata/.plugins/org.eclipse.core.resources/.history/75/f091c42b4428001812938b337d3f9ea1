@@ -1,0 +1,5 @@
+package Proxibanque.persistance;
+
+public interface DaoClient {
+
+}

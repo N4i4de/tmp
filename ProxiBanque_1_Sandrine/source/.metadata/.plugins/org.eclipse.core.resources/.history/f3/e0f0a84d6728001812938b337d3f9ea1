@@ -1,0 +1,14 @@
+package Proxibanque.model;
+
+public class CompteCourant extends Compte {
+	public final static String typecompte = "Courant";
+	
+	public CompteCourant(String numeroCompte, double solde, String type) {
+		super();
+	}
+	
+	public CompteCourant() {
+		
+	}
+
+}

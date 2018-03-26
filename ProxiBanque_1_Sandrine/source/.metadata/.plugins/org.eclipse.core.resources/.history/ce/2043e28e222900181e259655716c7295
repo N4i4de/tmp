@@ -1,0 +1,38 @@
+package Proxibanque.Service;
+
+import java.util.List;
+
+
+import Proxibanque.model.CarteBanquaire;
+import Proxibanque.model.Client;
+import Proxibanque.model.Compte;
+import Proxibanque.model.CompteCourant;
+import Proxibanque.model.CompteEpargne;
+
+/**
+ * Interface Service Gestion. 
+ * Permets de réaliser toutes les problématiques de gestions de comptes et des clients (créations, modifications).
+ * @author Sandrine
+ * @version 0.1
+ *
+ */
+public interface ServiceGestion {
+	//Outils métiers du service gestion
+	public void creerClient(Client c);
+	public void modifierClient(Integer id,Client cmodif);
+	public void lireInfoClient(Integer id);
+	public void ajouterCompteEpargne(Integer id,CompteEpargne c);
+	public void ajouterCompteCourant(Integer id,CompteCourant c);
+	public void supprimerComptes(Integer id);
+	public void lireComptes(Integer id);
+	public void ajouterCarte(Integer id, CarteBanquaire carte);
+	public void supprimerCarte(Integer id);
+	public void lireCarte(Integer id);
+	public void supprimerClient(Integer id);
+	
+	//outils de developpement
+	public  Client retournClient(Integer id);
+	public List<Client> retournListeClient();
+	
+
+}

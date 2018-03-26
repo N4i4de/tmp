@@ -1,0 +1,10 @@
+package Proxibanque.Service;
+
+import Proxibanque.model.Client;
+
+public interface ServiceSI {
+	public void SimulationCredit(Client client);
+	public void Virement(Compte c1, Compte c2);
+	public 
+
+}

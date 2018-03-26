@@ -1,0 +1,8 @@
+package Proxibanque.model;
+
+public class Compte {
+	private String numeroCompte;
+	
+	
+
+}

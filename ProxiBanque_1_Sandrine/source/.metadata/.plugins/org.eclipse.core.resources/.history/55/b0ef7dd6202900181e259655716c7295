@@ -1,0 +1,42 @@
+package Proxibanque.persistance;
+
+import java.util.List;
+
+import Proxibanque.model.Client;
+
+/**
+ * Interface du DAO. ne contient que des méthodes abstraites
+ * 
+ * @author Sandrine
+ * @version 0.1
+ */
+public interface DaoClient {
+
+	/**
+	 * Sauvegarde d'un client
+	 * 
+	 * @param c
+	 *            Instance de la classe Client que l'on va sauvegarder
+	 */
+	public void save(Client c);
+	
+
+	/**
+	 * @param id
+	 * identifiant chiffré du client et index dans la base de donnée. il permet de retrouver facilement le client pour le retourner
+	 * @return
+	 * elle retourne l'instance de la classe Client porteuse de l'identifiant id et stockée à l'index id dans la base de sauvegarde
+	 */
+	public Client getById(Integer id);
+
+	/**
+	 * @param id
+	 * 
+	 */
+	public void deleteById(Integer id);
+
+	public List<Client> getAll();
+
+	public void modifyClient(Integer id, Client cmodif);
+
+}

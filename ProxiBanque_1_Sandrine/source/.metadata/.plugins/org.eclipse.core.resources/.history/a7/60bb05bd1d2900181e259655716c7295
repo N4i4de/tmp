@@ -1,0 +1,30 @@
+package Proxibanque.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Classe Conseiller : elle permet la limitation à 10 client par conseiller.
+ * cette classe pourra être utilisée pour faciliter l'implémentation d'agence 
+ * @author adminl
+ *
+ */
+public class Conseiller {
+	private String nom;
+	private List<Client> listeClient=new ArrayList<>();
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public List<Client> getListeClient() {
+		return listeClient;
+	}
+	public void setListeClient(List<Client> listeClient) {
+		this.listeClient = listeClient;
+	}
+	
+
+}

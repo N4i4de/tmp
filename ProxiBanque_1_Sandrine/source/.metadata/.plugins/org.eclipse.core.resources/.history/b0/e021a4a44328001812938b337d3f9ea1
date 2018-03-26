@@ -1,0 +1,8 @@
+package Proxibanque.model;
+
+public class Conseiller {
+	private String nom;
+	private List<Client> listeClient;
+	
+
+}

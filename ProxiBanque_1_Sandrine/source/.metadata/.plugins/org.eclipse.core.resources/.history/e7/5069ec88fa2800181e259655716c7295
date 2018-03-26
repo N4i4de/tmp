@@ -1,0 +1,20 @@
+package Proxibanque.model;
+
+public class CompteEpargne extends Compte {
+	public final static String typecompte = "Epargne";
+	
+	public CompteEpargne(String numeroCompte, double solde, String type){
+		super();
+	}
+	
+	public CompteEpargne() {
+		
+	}
+
+	public static String getTypecompte() {
+		return typecompte;
+	}
+	
+	
+
+}

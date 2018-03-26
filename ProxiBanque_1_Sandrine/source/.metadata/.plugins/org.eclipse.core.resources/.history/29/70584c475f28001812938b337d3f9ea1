@@ -1,0 +1,43 @@
+package Proxibanque.model;
+
+public class Compte {
+	private String numeroCompte;
+	private double solde;
+	private String type;
+	private static final String entreprise = "ENTREPRISE";
+	private static final String particulier = "PARTICULIER";
+	
+	public Compte() {
+		
+	}
+	
+	public Compte(String numeroCompte, double solde, String type) {
+		this.numeroCompte = numeroCompte;
+		this.solde = solde;
+		this.type = type;
+	}
+	
+	
+	public String getNumeroCompte() {
+		return numeroCompte;
+	}
+	public void setNumeroCompte(String numeroCompte) {
+		this.numeroCompte = numeroCompte;
+	}
+	public double getSolde() {
+		return solde;
+	}
+	public void setSolde(double solde) {
+		this.solde = solde;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	
+	
+
+}

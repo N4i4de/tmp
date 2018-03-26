@@ -1,0 +1,11 @@
+package Proxibanque.model;
+
+public class CarteBanquaire {
+	private Client client;
+	private String type;
+	private static final String visa = "VISA";
+	private static final String electro = "ELECTRON"
+	
+	
+
+}

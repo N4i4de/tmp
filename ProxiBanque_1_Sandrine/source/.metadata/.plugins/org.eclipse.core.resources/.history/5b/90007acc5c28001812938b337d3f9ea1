@@ -1,0 +1,17 @@
+package Proxibanque.Service;
+
+import Proxibanque.model.Client;
+
+public interface ServiceGestion {
+	
+	public void creerClient(Client c);
+	public void modifierClient(Integer id,Client cmodif);
+	public void lireInfoClient(Integer id);
+	public void ajouterCompte(Integer id);
+	public void supprimerCompte(Integer id);
+	public void lireCompte(Integer id);
+	public void ajouterCarte(Integer Id);
+	public void supprimerCarte();
+	public void lireCarte();
+
+}

@@ -1,0 +1,6 @@
+package Proxibanque.model;
+
+public class CompteEparge extends Compte {
+	
+
+}

@@ -1,0 +1,21 @@
+package Proxibanque.model;
+
+
+/**
+ * 
+ * @author Sandrine
+ *
+ */
+public class CompteCourant extends Compte {
+
+	
+	public CompteCourant(String numeroCompte, double solde, String type) {
+		super();
+	}
+	
+	public CompteCourant() {
+		
+	}
+
+
+}

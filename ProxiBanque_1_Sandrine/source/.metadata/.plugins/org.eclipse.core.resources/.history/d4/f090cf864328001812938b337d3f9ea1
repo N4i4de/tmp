@@ -1,0 +1,7 @@
+package Proxibanque.model;
+
+public class Conseiller {
+	private String nom;
+	
+
+}

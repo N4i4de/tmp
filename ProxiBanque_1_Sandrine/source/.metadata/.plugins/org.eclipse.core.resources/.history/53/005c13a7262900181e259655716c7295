@@ -1,0 +1,24 @@
+package Proxibanque.Service;
+
+import java.util.List;
+
+import Proxibanque.model.Client;
+import Proxibanque.model.Compte;
+
+/**Interface SI de proxibanque
+ * permet de réaliser des opérations du SI (Virement, simulation de credit, réaliser l'audit de l'agence, et lancer l'alerte découvert)
+ * @author adminl
+ *
+ */
+public interface ServiceSI {
+	/**
+	 * réalise une simulation de crédit d'un client en prenant en compte sa capacité à emprunter
+	 * @param client
+	 * @return
+	 */
+	public List<Double> simulationCredit(Client client);
+	public void virement(Compte c1, Compte c2,double montant);
+	public List<Client> audit();
+	public void clientfortune();
+	public List<Client> alerteDecouvert();
+}

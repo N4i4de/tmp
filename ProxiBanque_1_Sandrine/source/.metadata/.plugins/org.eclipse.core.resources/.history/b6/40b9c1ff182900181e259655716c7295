@@ -1,0 +1,362 @@
+package Proxibanque.presentation;
+
+import java.util.List;
+import java.util.Scanner;
+
+import Proxibanque.Service.ImplServiceGestion;
+import Proxibanque.Service.ImplServiceSI;
+import Proxibanque.model.CarteBanquaire;
+import Proxibanque.model.Client;
+import Proxibanque.model.Compte;
+import Proxibanque.model.CompteCourant;
+import Proxibanque.model.CompteEpargne;
+import Proxibanque.model.Conseiller;
+
+public class Lanceur {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// Initialisation
+		String particulier = Compte.particulier;
+		String entreprise = Compte.entreprise;
+		String electron = CarteBanquaire.electro;
+		String visa = CarteBanquaire.visa;
+
+		ImplServiceGestion gestion = new ImplServiceGestion();
+		ImplServiceSI si = new ImplServiceSI();
+
+		// Partie Tuto
+		Scanner input = new Scanner(System.in);
+		System.out.println("bienvenue dans le SI de proxibanque" + '\n' + "Partie Tuto : Coté conseillé");
+		// Création Conseillé
+		System.out.println("Conseillé, entrez votre nom");
+		String nomconseiller = input.nextLine();
+		Conseiller conseil1 = new Conseiller();
+		conseil1.setNom(nomconseiller);
+
+		// Partie Tuto : création Client
+		System.out.println("Creation d'un client" + '\n' + "Entrez le nom du client");
+		String nomc1 = input.nextLine();
+		System.out.println("Entrez le prénom du client");
+		String prenomc1 = input.nextLine();
+		Client c1 = new Client(nomc1, prenomc1);
+		conseil1.getListeClient().add(c1);
+		gestion.creerClient(c1);
+		Integer id = c1.getId();
+		gestion.lireInfoClient(id);
+		// Ajout d'un compte Epargne
+		System.out.println("Ajoutez un compte Epargne à votre client");
+		CompteEpargne ce1 = new CompteEpargne();
+		c1.setCompteEpargne(ce1);
+		// solde du compte
+		System.out.println("Entrez le solde du compte : ");
+		Double soldece = input.nextDouble();
+		input.nextLine();
+		ce1.setSolde(soldece);
+		ce1.setNumeroCompte("E" + c1.getId());
+		// particulier ou entreprise
+		System.out.println("Particulier [p] ou Entreprise [e]?");
+		String reptypecompte = input.nextLine();
+		if (reptypecompte.equals("p")) {
+			ce1.setType(particulier);
+		} else if (reptypecompte.equals("e")) {
+			ce1.setType(entreprise);
+		}
+		gestion.lireComptes(id);
+		// Ajout d'un compte Courant
+		System.out.println("Ajoutez un compte courant à votre client");
+		CompteCourant cc1 = new CompteCourant();
+		c1.setCompteCourant(cc1);
+		System.out.println("Entrez le solde du compte : ");
+		Double soldecc = input.nextDouble();
+		input.nextLine();
+		cc1.setSolde(soldecc);
+		cc1.setNumeroCompte("C" + c1.getId());
+		System.out.println("Particulier [p] ou Entreprise [e]?");
+		reptypecompte = input.nextLine();
+		if (reptypecompte.equals("p")) {
+			cc1.setType(particulier);
+		} else if (reptypecompte.equals("e")) {
+			cc1.setType(entreprise);
+		}
+		gestion.lireComptes(id);
+		// Ajout d'une carte
+		System.out.println("Ajoutez une carte à votre client");
+		CarteBanquaire carte1 = new CarteBanquaire(c1);
+		System.out.println("Visa [v] ou Electron [e]");
+		String rep = input.nextLine();
+		switch (rep) {
+		case "e":
+			carte1.setType(electron);
+			break;
+		case "v":
+			carte1.setType(visa);
+			break;
+		default:
+			System.out.println("erreur, carte non créée");
+			break;
+		}
+		gestion.ajouterCarte(id, carte1);
+		gestion.lireCarte(id);
+
+		// Partie choix :
+		System.out.println("La partie tutorielle est terminée. vous pouvez maintenant passer au logiciel");
+		int reponseutilisateur = 1;
+		do {
+			System.out.println("Que voulez vous faire ?" + '\n' + "Ajouter un nouveau client [1]" + '\n'
+					+ "Creer des compte [2]" + '\n' + "Creer une carte [3]" + '\n' + "Modifier les données clients [4]"
+					+ '\n' + "Faire un viremment [5]" + '\n' + "Faire une simulation de Credit [6]" + '\n'
+					+ "Gerer des clients fortunés [7]" + '\n' + "Lancer l'alerte découvert [8]" + '\n'
+					+ "Lancer l'audit [9]" + '\n' + "Quitter Proxibanque SI [0]");
+			reponseutilisateur = input.nextInt();
+			input.nextLine();
+			switch (reponseutilisateur) {
+			case 1:// ajout client
+				if (conseil1.getListeClient().size() < 10) {
+					System.out.println("Creation d'un client" + '\n' + "Entrez le nom du client");
+					String nomci = input.nextLine();
+					System.out.println("Entrez le prénom du client");
+					String prenomci = input.nextLine();
+					Client ci = new Client(nomci, prenomci);
+					conseil1.getListeClient().add(ci);
+					gestion.creerClient(ci);
+					CompteCourant cci = new CompteCourant();
+					CompteEpargne cei = new CompteEpargne();
+					//mise à zéro des comptes pour éviter les problémes pour les audits et les alertes découverts
+					ci.setCompteCourant(cci);
+					ci.setCompteEpargne(cei);
+					ci.getCompteCourant().setSolde(0);
+					ci.getCompteEpargne().setSolde(0);
+					Integer idi = ci.getId();
+					gestion.lireInfoClient(idi);
+				} else {
+					System.out.println("Conseillé "+conseil1.getNom()+" Vous avez déjà 10 clients à votre charge");
+				}
+
+				break;
+			case 2:// creer un compte
+				System.out.println("Eparge[e] ou Courant [c]");
+				String repc = input.nextLine();
+
+				if (repc.equals("e")) {
+					// epargne
+					System.out
+							.println("création d'un compte épargne" + '\n' + "entrée l'identifiant chiffré du client");
+					Integer idi = (Integer) input.nextInt();
+					CompteEpargne cei = new CompteEpargne();
+					Client ci = gestion.retournClient(idi);
+					ci.setCompteEpargne(cei);
+					System.out.println("Entrez le solde du compte : ");
+					Double soldecei = input.nextDouble();
+					cei.setSolde(soldecei);
+					cei.setNumeroCompte("E" + ci.getId());
+					input.nextLine();
+					System.out.println("Particulier [p] ou Entreprise [e]?");
+					reptypecompte = input.nextLine();
+					if (reptypecompte.equals("p")) {
+						cei.setType(particulier);
+					} else if (reptypecompte.equals("e")) {
+						cei.setType(entreprise);
+					}
+					gestion.modifierClient(idi, ci);
+					gestion.lireComptes(idi);
+
+				} else if (repc.equals("c")) {
+					// courant
+					System.out
+							.println("création d'un compte courant" + '\n' + "entrée l'identifiant chiffré du client");
+					int idi = input.nextInt();
+					Client ci = gestion.retournClient(idi);
+					CompteCourant cci = new CompteCourant();
+					ci.setCompteCourant(cci);
+					System.out.println("Entrez le solde du compte : ");
+					Double soldecci = input.nextDouble();
+					cci.setSolde(soldecci);
+					cci.setNumeroCompte("C" + ci.getId());
+					input.nextLine();
+					System.out.println("Particulier [p] ou Entreprise [e]?");
+					reptypecompte = input.nextLine();
+					if (reptypecompte.equals("p")) {
+						cci.setType(particulier);
+					} else if (reptypecompte.equals("e")) {
+						cci.setType(entreprise);
+					}
+					gestion.modifierClient(idi, ci);
+					gestion.lireComptes(idi);
+				} else {
+					System.out.println("erreur. compte non créer");
+				}
+				input.nextLine();
+
+				break;
+			case 3: // creer une carte
+				System.out.println("Ajoutez une carte à votre client");
+				CarteBanquaire cartei = new CarteBanquaire();
+				System.out.println("Visa [v] ou Electron [e]");
+				String repca = input.nextLine();
+				switch (repca) {
+				case "e":
+					cartei.setType(electron);
+					break;
+				case "v":
+					cartei.setType(visa);
+					break;
+				default:
+					System.out.println("erreur, carte non créée");
+					break;
+				}
+				gestion.ajouterCarte(id, cartei);
+				gestion.lireCarte(id);
+				break;
+			case 4: // Modifier les données clients
+				System.out.println("Entrez l'identifant du client à modifier");
+				Integer idi = (Integer) input.nextInt();
+				Client ci = gestion.retournClient(idi);
+				System.out.println(ci);
+				input.nextLine();
+				System.out.println("Que voulez vous modifier ?" + '\n'
+						+ "nom [n], prénom [p], adresse [a], code postal [c] ou la ville [v] ? ou supprimer le client [s]? ");
+				// swicth case pour les différents attributs
+				String repm = input.nextLine();
+				switch (repm) {
+				case "n":// nom
+					System.out.println("Entrez la nouvelle données : ");
+					String newnom = input.nextLine();
+					ci.setNom(newnom);
+					gestion.modifierClient(idi, ci);
+					break;
+				case "p":// prenom
+					System.out.println("Entrez la nouvelle données : ");
+					String newprenom = input.nextLine();
+					ci.setNom(newprenom);
+					gestion.modifierClient(idi, ci);
+
+					break;
+				case "a":// adresse
+					System.out.println("Entrez la nouvelle données : ");
+					String newadresse = input.nextLine();
+					ci.setNom(newadresse);
+					gestion.modifierClient(idi, ci);
+
+					break;
+				case "c":// code postal
+					System.out.println("Entrez la nouvelle données : ");
+					String newcode = input.nextLine();
+					ci.setNom(newcode);
+					gestion.modifierClient(idi, ci);
+
+					break;
+				case " v":// ville
+					System.out.println("Entrez la nouvelle données : ");
+					String newville = input.nextLine();
+					ci.setNom(newville);
+					gestion.modifierClient(idi, ci);
+
+					break;
+				case "s": // suppression d'u client
+					System.out.println("suppression du client");
+					gestion.supprimerClient(idi);
+				default:
+					System.out.println("erreur, donnée client laissée identique");
+					break;
+				}
+				System.out.println(gestion.retournClient(idi));
+
+				break;
+			case 5: // Faire un virement
+				System.out.println("entrez le n° de compte de départ");
+				String numcompte1 = input.nextLine();
+				System.out.println("entrez le n° de compte d'arrivée");
+				String numcompte2 = input.nextLine();
+				System.out.println("entrez le montant à virer");
+				double montant = input.nextDouble();
+				List<Client> listeClient = gestion.retournListeClient();
+				Compte comptedepart = new Compte();
+				Compte comptedarrivee = new Compte();
+				for (Client client : listeClient) {
+					Compte cetest = client.getCompteEpargne();
+					Compte cctest = client.getCompteCourant();
+					if (cetest.getNumeroCompte().equals(numcompte1)) {
+						comptedepart = cetest;
+					} else if (cctest.getNumeroCompte().equals(numcompte1)) {
+						comptedepart = cctest;
+					}
+					if (cetest.getNumeroCompte().equals(numcompte2)) {
+						comptedarrivee = cetest;
+					} else if (cctest.getNumeroCompte().equals(numcompte2)) {
+						comptedarrivee = cctest;
+					}
+
+				}
+				si.virement(comptedepart, comptedarrivee, montant);
+				System.out.println("nouveau solde compte depart " + comptedepart.getSolde() + '\n'
+						+ "nouveau solde compte arrivee " + comptedarrivee.getSolde());
+				break;
+			case 6:// Faire une simulation de credit
+				System.out.println("Entrez l'identifant du client qui demande la simulation de prêt");
+				idi = (Integer)input.nextInt();
+				Client clientpret = gestion.retournClient(idi);
+				List<Double> reponsesimulationpret = si.simulationCredit(clientpret);
+				if(reponsesimulationpret.size()>1) {
+					double montantpret = reponsesimulationpret.get(0);
+					double dureepret = reponsesimulationpret.get(1);
+					double mensualitepret = reponsesimulationpret.get(2);
+					
+					System.out.println("Vous pouvez avoir un prêt de " + montantpret+ " remboursable sur "+ dureepret+" ans et de mensualité "+ mensualitepret);
+					
+				}else {
+					System.out.println("désolée, le pret ne peut être accordé.");
+				}
+
+				break;
+			case 7:// Gerer les clients fortune
+				System.out.println("Fonctionnalité pas encore disponible. (Vu et validé avec le product owner).");
+
+				break;
+			case 8:// Lancer l'alerte découvert
+				System.out.println("lancement de l'analyse découvert...");
+				List<Client> listeclientdecouvert = si.alerteDecouvert();
+				if (listeclientdecouvert.size()!=0) {
+					System.out.println("Attention : " + listeclientdecouvert.size() +" client(s) dépasse(nt) leur découvert autorisé. Voici la liste");
+					for (Client clientdecouvert : listeclientdecouvert) {
+						System.out.println(clientdecouvert);
+					}
+					System.out.println("Ces clients ont été prévenus par sms de leur découvert.");
+				} else {
+					System.out.println("aucun client ne dépasse son découvert autorisé");
+				}
+				
+
+				break;
+			case 9:// Lancer l'audit
+				System.out.println("Lancement de l'audit de votre agence");
+				List<Client> listeclientaudit = si.audit();
+				if (listeclientaudit.size() != 0) {
+					System.out.println(
+							"Attention, " + listeclientaudit.size() + " client(s) ne respecte(nt) pas les conditions d'audit. Voici la liste");
+					for (Client clientaudit : listeclientaudit) {
+						System.out.println(clientaudit);
+					}
+
+				} else {
+					System.out.println("Felicitations. tout vos clients respectent les conditions d'audit");
+				}
+
+				break;
+			case 0 : 
+				break;
+				
+			default:
+				System.out.println("Je n'ai pas compris votre réponse.");
+				break;
+			}
+
+		} while (reponseutilisateur != 0);
+		input.close();
+		System.out.println("Fermeture du logiciel ProxibanqueSI" + '\n' + "Au revoir et à bientot");
+	}
+
+}

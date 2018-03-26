@@ -1,0 +1,48 @@
+package Proxibanque.model;
+
+/**
+ * @author Sandrine
+ * 
+ *
+ */
+public class CarteBanquaire {
+	private Client client;
+	private String type;
+	public static final String VISA = "VISA";
+	public static final String ELECTRON = "ELECTRON";
+	
+	public CarteBanquaire() {
+		
+	}
+	
+	
+	public CarteBanquaire(Client client) {
+		//super();
+		this.client = client;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	@Override
+	public String toString() {
+		return "CarteBanquaire [type=" + type + "]";
+	}
+	
+	
+
+}

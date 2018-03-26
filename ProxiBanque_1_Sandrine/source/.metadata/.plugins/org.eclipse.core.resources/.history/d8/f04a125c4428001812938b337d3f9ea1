@@ -1,0 +1,9 @@
+package Proxibanque.persistance;
+
+import java.util.HashMap;
+
+public interface DaoClient {
+	private static final HashMap<Interger, Client> DBClient;
+	
+
+}

@@ -1,0 +1,14 @@
+package Proxibanque.Service;
+
+import java.util.List;
+
+import Proxibanque.model.Client;
+import Proxibanque.model.Compte;
+
+public interface ServiceSI {
+	public void simulationCredit(Client client);
+	public void virement(Compte c1, Compte c2,double montant);
+	public List<Client> audit();
+	public void clientfortune();
+	public List<Client> alerteDecouvert();
+}

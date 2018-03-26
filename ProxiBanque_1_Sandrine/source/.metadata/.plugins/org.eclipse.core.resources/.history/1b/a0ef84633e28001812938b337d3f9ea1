@@ -1,0 +1,9 @@
+package Proxibanque.model;
+
+public class Client {
+	String nom;
+	String prenom;
+	String adresse;
+	String 
+
+}

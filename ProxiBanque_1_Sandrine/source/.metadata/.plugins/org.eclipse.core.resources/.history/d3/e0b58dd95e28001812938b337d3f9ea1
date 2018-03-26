@@ -1,0 +1,128 @@
+package Proxibanque.Service;
+
+import java.util.List;
+import java.util.Scanner;
+
+import Proxibanque.model.CarteBanquaire;
+import Proxibanque.model.Client;
+import Proxibanque.model.CompteCourant;
+import Proxibanque.model.CompteEpargne;
+import Proxibanque.persistance.DaoClient;
+import Proxibanque.persistance.MemDAOClient;
+
+public class ImplServiceGestion implements ServiceGestion {
+
+	DaoClient dao = new MemDAOClient();
+
+	public void creerClient(Client c) {
+		// TODO Auto-generated method stub
+		dao.save(c);
+	}
+
+	public void modifierClient(Integer id,Client cmodif) {
+		// TODO 
+		// faire un switch case pour modifier les data
+		dao.deleteById(id);
+		dao.save(cmodif);
+	}
+
+	public void lireInfoClient(Integer id) {
+
+		System.out.println("données client" + dao.getById(id));
+	}
+
+	@Override
+	public void ajouterCompte(Integer id) {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Creer Compte Eparge [e] ou Compte Courant [c]?");
+		String rep = input.nextLine();
+		switch (rep) {
+		case "e":
+			CompteEpargne ce = new CompteEpargne();
+			dao.getById(id).setCompteEpargne(ce);
+			System.out.println("Entrez le solde du premier apport");
+			double ce.setSolde() = input.nextDouble();
+			break;
+		case "c": 
+			CompteCourant cc = new CompteCourant();
+			dao.getById(id).setCompteCourant(cc);
+			break;
+
+		default:
+			System.out.println("erreur pas de compte créer");
+			break;
+		}
+		input.close();
+
+	}
+
+	@Override
+	public void supprimerCompte(Integer id) {
+		// TODO Auto-generated method stub
+		Scanner input = new Scanner(System.in);
+		System.out.println("Supprimer Compte Eparge [e] ou Compte Courant [c]?");
+		String rep = input.nextLine();
+		switch (rep) {
+		case "e":
+			CompteEpargne ce = new CompteEpargne();
+			dao.getById(id).setCompteEpargne(null);
+			break;
+		case "c": 
+			CompteCourant cc = new CompteCourant();
+			dao.getById(id).setCompteCourant(null);
+
+			break;
+
+		default:
+			System.out.println("erreur pas de compte supprimer");
+			break;
+		}
+		input.close();
+	}
+
+	@Override
+	public void lireCompte(Integer id) {
+		// TODO Auto-generated method stub
+		System.out.println(dao.getById(id).getCompteEpargne()+" "+dao.getById(id).getCompteCourant());
+
+	}
+
+	@Override
+	public void ajouterCarte(Integer id) {
+		// TODO Auto-generated method stub
+		CarteBanquaire carte = new CarteBanquaire(dao.getById(id));
+		Scanner input = new Scanner(System.in);
+		System.out.println("Carte Visa [v] ou carte electron [e] ?");
+		String rep = input.nextLine();
+		switch (rep) {
+		case "v":
+			carte.setType(carte.visa);
+			break;
+		case "e": 
+			carte.setType(carte.electro);
+
+			break;
+
+		default:
+			System.out.println("erreur pas de carte créee");
+			break;
+		}
+		input.close();
+		
+		dao.getById(id).setCarte(carte);
+
+	}
+
+	@Override
+	public void supprimerCarte() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void lireCarte() {
+		// TODO Auto-generated method stub
+
+	}
+
+}
