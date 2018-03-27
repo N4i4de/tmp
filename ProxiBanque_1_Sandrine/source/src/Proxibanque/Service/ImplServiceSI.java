@@ -11,7 +11,7 @@ public class ImplServiceSI implements ServiceSI {
 
 	@Override
 	public List<Double> simulationCredit(Client client) {
-		// TODO simulation credit
+		// DONE simulation credit
 		List<Double> donneesimupret= new ArrayList<>();
 		double soldecc = client.getCompteCourant().getSolde();
 		double soldece = client.getCompteEpargne().getSolde();
@@ -32,7 +32,7 @@ public class ImplServiceSI implements ServiceSI {
 
 	@Override
 	public void virement(Compte c1, Compte c2, double montant) {
-		// TODO Auto-generated method stub
+		// DONE Auto-generated method stub
 		// C1 : compte d'entree
 		// C2 : compte de sortie
 		c1.setSolde(c1.getSolde() - montant);
@@ -41,7 +41,7 @@ public class ImplServiceSI implements ServiceSI {
 
 	@Override
 	public List<Client> audit() {
-		// TODO Auto-generated method stub
+		// DONE Auto-generated method stub
 		List<Client> listeclient = gestion.retournListeClient();
 		List<Client> listaudit = new ArrayList<>();
 		for (Client client : listeclient) {
@@ -67,7 +67,7 @@ public class ImplServiceSI implements ServiceSI {
 
 	@Override
 	public List<Client> alerteDecouvert() {
-		// TODO Auto-generated method stub
+		// DONE Auto-generated method stub
 		List<Client> listeclient = gestion.retournListeClient();
 		List<Client> listdecouvert = new ArrayList<>();
 		for (Client client : listeclient) {
