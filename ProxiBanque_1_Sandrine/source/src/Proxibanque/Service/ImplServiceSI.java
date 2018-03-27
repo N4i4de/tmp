@@ -16,12 +16,12 @@ public class ImplServiceSI implements ServiceSI {
 		double soldecc = client.getCompteCourant().getSolde();
 		double soldece = client.getCompteEpargne().getSolde();
 		if (soldecc > 0 && soldece > 0) {
-			double capacitéemprunt = (soldecc + soldece) * Math.random() * 1000;
+			double capaciteemprunt = (soldecc + soldece) * Math.random() * 1000;
 			double dureepret = (int) Math.random() * 100;
-			double mensualité = (int) (capacitéemprunt / (12 * dureepret));
-			donneesimupret.add(capacitéemprunt);
+			double mensualite = (int) (capaciteemprunt / (12 * dureepret));
+			donneesimupret.add(capaciteemprunt);
 			donneesimupret.add(dureepret);
-			donneesimupret.add(mensualité);
+			donneesimupret.add(mensualite);
 
 		} else {
 			donneesimupret.add(0.0);
